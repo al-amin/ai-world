@@ -2,6 +2,58 @@
 
 A Model Context Protocol (MCP) server implementation for sending messages to Microsoft Teams channels via incoming webhooks. This server allows AI assistants to send notifications, alerts, and interactive messages to Microsoft Teams.
 
+## Architecture Diagram
+
+```mermaid
+flowchart TB
+    AI[AI Assistant/LLM] --> |Requests| MCP[MCP Server]
+    MCP --> |Tool Registration| Router[Tool Router]
+    Router --> TeamsIntegration[Teams Integration]
+    TeamsIntegration --> MessageProcessor[Message Processor]
+    MessageProcessor --> MessageFormatter[Message Formatter]
+    MessageFormatter --> |Webhook Request| Teams[(MS Teams)]
+    
+    subgraph "MCP MS Teams Webhook Server"
+        Router
+        TeamsIntegration
+        MessageProcessor
+        MessageFormatter
+        WebhookManager[Webhook Manager]
+        ConfigManager[Config Manager]
+    end
+    
+    TeamsIntegration --> WebhookManager
+    WebhookManager --> ConfigManager
+    
+    class AI,Teams external
+    class MCP,Router,TeamsIntegration,MessageProcessor,MessageFormatter,WebhookManager,ConfigManager internal
+```
+
+## Message Flow Diagram
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant AI as AI Assistant
+    participant MCP as MCP Server
+    participant TH as Tool Handler
+    participant TC as Teams Client
+    participant WH as Webhook Manager
+    participant MST as MS Teams
+
+    AI->>MCP: Call tool (teams_send_message)
+    MCP->>TH: Route request to handler
+    TH->>TC: Create message
+    TC->>TC: Format message
+    TC->>WH: Get webhook configuration
+    WH->>WH: Validate webhook
+    TC->>MST: Send webhook request
+    MST-->>TC: Response
+    TC-->>TH: Delivery status
+    TH-->>MCP: Result
+    MCP-->>AI: Tool result
+```
+
 ## Features
 
 - Send plain text messages with markdown formatting
