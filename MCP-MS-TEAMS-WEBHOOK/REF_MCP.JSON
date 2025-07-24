@@ -1,0 +1,99 @@
+{
+    "name": "MCP MS Teams Webhook",
+    "version": "0.1.0",
+    "description": "An MCP server for sending messages to Microsoft Teams via webhooks",
+    "main_module": "mcp_teams_webhook",
+    "entry_point": {
+        "module": "mcp_teams_webhook.server",
+        "function": "run_server"
+    },
+    "transport": {
+        "default": "stdio",
+        "options": ["stdio", "sse"]
+    },
+    "configuration": {
+        "env_variables": [
+            {
+                "name": "TEAMS_WEBHOOK_URL",
+                "description": "MS Teams incoming webhook URL",
+                "required": false
+            },
+            {
+                "name": "TEAMS_WEBHOOK_NAME",
+                "description": "Name for the webhook configuration",
+                "default": "default",
+                "required": false
+            },
+            {
+                "name": "TEAMS_WEBHOOK_CONFIG_FILE",
+                "description": "Path to webhook configuration file",
+                "required": false
+            },
+            {
+                "name": "MCP_LOG_LEVEL",
+                "description": "Logging level",
+                "default": "INFO",
+                "options": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                "required": false
+            }
+        ]
+    },
+    "tools": [
+        {
+            "name": "teams_send_message",
+            "description": "Send a text message to a Microsoft Teams channel",
+            "category": "messaging",
+            "parameters": {
+                "text": "Message text content (supports markdown)",
+                "title": "Optional message title",
+                "webhook_name": "Optional webhook configuration name"
+            }
+        },
+        {
+            "name": "teams_send_adaptive_card",
+            "description": "Send an Adaptive Card to a Microsoft Teams channel",
+            "category": "messaging",
+            "parameters": {
+                "card_elements": "JSON array of Adaptive Card elements",
+                "title": "Optional card title",
+                "webhook_name": "Optional webhook configuration name"
+            }
+        },
+        {
+            "name": "teams_send_notification",
+            "description": "Send a notification message to a Microsoft Teams channel",
+            "category": "messaging",
+            "parameters": {
+                "title": "Notification title",
+                "message": "Notification message content",
+                "priority": "Message priority (normal, important, urgent)",
+                "webhook_name": "Optional webhook configuration name"
+            }
+        },
+        {
+            "name": "teams_webhook_status",
+            "description": "Check the status of a Teams webhook",
+            "category": "management",
+            "parameters": {
+                "webhook_name": "Optional webhook configuration name"
+            }
+        },
+        {
+            "name": "teams_add_webhook",
+            "description": "Add a new Teams webhook configuration",
+            "category": "management",
+            "parameters": {
+                "name": "Unique name for this webhook",
+                "url": "MS Teams incoming webhook URL",
+                "description": "Optional webhook description"
+            }
+        }
+    ],
+    "dependencies": [
+        "mcp-server>=0.1.0",
+        "pydantic>=2.0.0",
+        "httpx>=0.24.0",
+        "python-dotenv>=1.0.0"
+    ],
+    "python_version": ">=3.9"
+}

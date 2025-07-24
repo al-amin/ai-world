@@ -1,0 +1,20 @@
+{
+  "webhooks": [
+    {
+      "name": "general",
+      "url": "https://outlook.office.com/webhook/your-webhook-id/IncomingWebhook/your-webhook-path",
+      "description": "General channel for team notifications",
+      "is_default": true,
+      "status": "active",
+      "created_at": "2023-07-24T00:00:00Z"
+    },
+    {
+      "name": "alerts",
+      "url": "https://outlook.office.com/webhook/your-alerts-webhook-id/IncomingWebhook/your-alerts-webhook-path",
+      "description": "High priority alerts channel",
+      "is_default": false,
+      "status": "active",
+      "created_at": "2023-07-24T00:00:00Z"
+    }
+  ]
+}

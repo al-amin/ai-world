@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "MCP Teams Webhook (stdio)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "mcp_teams_webhook",
+            "justMyCode": false,
+            "args": [
+                "--log-level", "DEBUG"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src:${PYTHONPATH}"
+            }
+        },
+        {
+            "name": "MCP Teams Webhook (sse)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "mcp_teams_webhook",
+            "justMyCode": false,
+            "args": [
+                "--transport", "sse",
+                "--port", "8000",
+                "--log-level", "DEBUG"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src:${PYTHONPATH}"
+            }
+        },
+        {
+            "name": "Run Example",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/example_usage.py",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src:${PYTHONPATH}"
+            }
+        },
+        {
+            "name": "Run Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "-xvs"
+            ],
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src:${PYTHONPATH}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+  "inputs": [],
+  "servers": {
+    "mcp-teams-webhook-prod": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/src/mcp_teams_webhook/server.py"
+      ],
+      "env": {
+        "TEAMS_WEBHOOK_URL": "https://outlook.office.com/webhook/your-webhook-id/IncomingWebhook/your-webhook-path",
+        "TEAMS_WEBHOOK_NAME": "default",
+        "PYTHONPATH": "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/src",
+        "MCP_LOG_LEVEL": "INFO",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "cwd": "${workspaceFolder}"
+    },
+    "mcp-teams-webhook-dev": {
+      "type": "stdio",
+      "command": "${workspaceFolder}/venv/bin/python",
+      "args": [
+        "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/src/mcp_teams_webhook/server.py"
+      ],
+      "env": {
+        "TEAMS_WEBHOOK_URL": "https://outlook.office.com/webhook/your-webhook-id/IncomingWebhook/your-webhook-path",
+        "TEAMS_WEBHOOK_NAME": "default",
+        "TEAMS_WEBHOOK_CONFIG_FILE": "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/sample_config.json",
+        "PYTHONPATH": "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/src",
+        "MCP_LOG_LEVEL": "DEBUG",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "cwd": "${workspaceFolder}"
+    },
+    "mcp-teams-webhook-debug": {
+      "type": "stdio",
+      "command": "${workspaceFolder}/venv/bin/python",
+      "args": [
+        "-m",
+        "debugpy",
+        "--listen",
+        "5678",
+        "--wait-for-client",
+        "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/src/mcp_teams_webhook/server.py"
+      ],
+      "env": {
+        "TEAMS_WEBHOOK_URL": "https://outlook.office.com/webhook/your-webhook-id/IncomingWebhook/your-webhook-path",
+        "TEAMS_WEBHOOK_NAME": "default",
+        "TEAMS_WEBHOOK_CONFIG_FILE": "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/sample_config.json",
+        "PYTHONPATH": "${workspaceFolder}/MCP-MS-TEAMS-WEBHOOK/src",
+        "MCP_LOG_LEVEL": "DEBUG",
+        "PYTHONUNBUFFERED": "1"
+      },
+      "cwd": "${workspaceFolder}"
+    }
+  }
+}

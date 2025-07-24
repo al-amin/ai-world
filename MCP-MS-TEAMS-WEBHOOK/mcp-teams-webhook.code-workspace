@@ -1,0 +1,45 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/env/bin/python",
+        "python.analysis.extraPaths": [
+            "${workspaceFolder}/src"
+        ],
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.linting.flake8Enabled": false,
+        "python.linting.mypyEnabled": true,
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+            88
+        ],
+        "[python]": {
+            "editor.formatOnSave": true,
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": "explicit"
+            }
+        },
+        "terminal.integrated.env.linux": {
+            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+        },
+        "terminal.integrated.env.osx": {
+            "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+        },
+        "terminal.integrated.env.windows": {
+            "PYTHONPATH": "${workspaceFolder}/src;${env:PYTHONPATH}"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "ms-python.black-formatter",
+            "ms-python.debugpy",
+            "njpwerner.autodocstring"
+        ]
+    }
+}
