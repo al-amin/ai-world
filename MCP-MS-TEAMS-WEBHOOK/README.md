@@ -346,3 +346,7 @@ Microsoft Teams webhooks are limited to 4 requests per second. If you exceed thi
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+Built with ❤️ by Al Amin
